@@ -11,7 +11,9 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 from pathlib import Path
+
 import os
+import django_heroku
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -23,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-!)aobb+t^)8u+-qxu8et(ta$flwk@^wqra!p9io2@z0yu1xzqa'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = []
 
@@ -133,3 +135,7 @@ AWS_ACCESS_KEY_ID = 'AKIARBVDRSOZEWQB2OKS'
 AWS_SECRET_ACCESS_KEY = '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'
 AWS_STORAGE_BUCKET_NAME = 'edugeeks-assets'
 AWS_QUERYSTRING_AUTH= False
+
+
+# Activate Django-Heroku.
+django_heroku.settings(locals())
