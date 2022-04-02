@@ -12,6 +12,8 @@ class Profile(models.Model):
     phone=models.IntegerField()
     address=models.CharField(max_length=100)
     image = models.ImageField(upload_to=nameFile, blank=True, null=True)
+    subscription_start_date=models.DateField()
+    subscription_end_date=models.DateField()
     def __str__(self):
         return self.name
 
