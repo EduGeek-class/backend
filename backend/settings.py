@@ -80,11 +80,22 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
+ 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
+
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.postgresql',
+    #     'NAME': 'edugeekdb',
+    #     'USER': 'postgres',
+    #     'PASSWORD': 'password',
+    #     'HOST': 'database-1.cluster-csjzqc9rmfh6.us-west-1.rds.amazonaws.com',
+    #     'PORT': '5432',
+    # },
+
 }
 
 
@@ -131,9 +142,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
-AWS_ACCESS_KEY_ID = 'AKIARBVDRSOZEWQB2OKS'
-AWS_SECRET_ACCESS_KEY = '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'
-AWS_STORAGE_BUCKET_NAME = 'edugeeks-assets'
+AWS_ACCESS_KEY_ID = 'AKIARBVDRSOZPD2D3BWE'
+AWS_SECRET_ACCESS_KEY = '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'
+AWS_STORAGE_BUCKET_NAME = 'edugeek'
 AWS_QUERYSTRING_AUTH= False
 
 

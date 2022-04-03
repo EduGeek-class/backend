@@ -50,3 +50,4 @@ class Batches(models.Model):
     timing=models.TimeField()
     def __str__(self):
         return str(self.batch_code)
+
