@@ -1,1 +1,0 @@
-web: gunicorn backend.wgsi --log-file -

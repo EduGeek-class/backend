@@ -11,9 +11,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 from pathlib import Path
-
 import os
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -25,9 +23,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-!)aobb+t^)8u+-qxu8et(ta$flwk@^wqra!p9io2@z0yu1xzqa'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1','.herokuapp.com']
+ALLOWED_HOSTS = []
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/' # 'http://myhost:port/media/'
@@ -43,9 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'batch.apps.BatchConfig',
-    'rest_framework',
-    'whitenoise.runserver_nostatic',
-    'django.contrib.staticfiles'
+    'rest_framework'
 ]
 
 MIDDLEWARE = [
@@ -56,10 +52,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware'
 ]
-WHITENOISE_USE_FRIENDS=True
-STATICFILES_STORAGE='whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 ROOT_URLCONF = 'backend.urls'
 
 TEMPLATES = [
@@ -84,22 +78,11 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
- 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
-
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.postgresql',
-    #     'NAME': 'edugeekdb',
-    #     'USER': 'postgres',
-    #     'PASSWORD': 'password',
-    #     'HOST': 'database-1.cluster-csjzqc9rmfh6.us-west-1.rds.amazonaws.com',
-    #     'PORT': '5432',
-    # },
-
 }
 
 
@@ -148,7 +131,5 @@ DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 AWS_ACCESS_KEY_ID = 'AKIARBVDRSOZPD2D3BWE'
 AWS_SECRET_ACCESS_KEY = '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'
-AWS_STORAGE_BUCKET_NAME = 'edugeek'
+AWS_STORAGE_BUCKET_NAME = 'edugeeks-assets'
 AWS_QUERYSTRING_AUTH= False
-
-
