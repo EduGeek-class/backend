@@ -45,9 +45,9 @@ class Batches(models.Model):
     batch_start=models.DateTimeField()
     batch_code=models.IntegerField()
     course=models.CharField(max_length=50)
-    category=models.CharField(max_length=10)
-    subject=models.CharField(max_length=20)
-    timing=models.TimeField()
+    category=models.CharField(max_length=10, null=True, blank=True)
+    subject=models.CharField(max_length=20, null=True, blank=True)
+    timing=models.TimeField(null=True, blank=True)
     def __str__(self):
         return str(self.batch_code)
 
