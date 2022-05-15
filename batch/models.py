@@ -9,7 +9,7 @@ class Profile(models.Model):
     name=models.CharField(max_length=60)
     dob=models.DateField()
     email=models.EmailField()
-    phone=models.IntegerField()
+    phone=models.CharField(max_length=15)
     address=models.CharField(max_length=100)
     image = models.ImageField(upload_to=nameFile, blank=True, null=True)
     subscription_start_date=models.DateField()
