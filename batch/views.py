@@ -1,8 +1,8 @@
 # views.py
 from rest_framework import viewsets
 
-from .serializers import UserSerializer,CourseSerializer,BatchSerializer
-from .models import Profile,Courses,Batches
+from .serializers import UserSerializer, CourseSerializer, BatchSerializer, AdminSerializer
+from .models import Profile, Courses, Batches, Admin
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -20,3 +20,7 @@ class CourseViewSet(viewsets.ModelViewSet):
 class BatchViewSet(viewsets.ModelViewSet):
     queryset = Batches.objects.all().order_by('batch_code')
     serializer_class = BatchSerializer
+class AdminViewSet(viewsets.ModelViewSet):
+    queryset = Admin.objects.all().order_by('username')
+    serializer_class = AdminSerializer
+    lookup_field = 'username'

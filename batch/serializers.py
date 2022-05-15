@@ -1,7 +1,7 @@
 # serializers.py
 from rest_framework import serializers
 
-from .models import Profile,Courses,Batches
+from .models import Profile,Courses,Batches, Admin
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
@@ -23,5 +23,10 @@ class BatchSerializer(serializers.ModelSerializer):
     class Meta:
         model = Batches
         fields = ('batch_start','batch_code','course','category','subject','timing')
+
+class AdminSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Admin
+        fields = ('username', 'password')
 
  

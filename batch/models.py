@@ -51,3 +51,9 @@ class Batches(models.Model):
     def __str__(self):
         return str(self.batch_code)
 
+class Admin(models.Model):
+    username=models.CharField(max_length=50, unique=True)
+    password=models.CharField(max_length=50)
+    def __str__(self):
+        return str(self.username)
+
