@@ -14,6 +14,7 @@ class Profile(models.Model):
     image = models.ImageField(upload_to=nameFile, blank=True, null=True)
     subscription_start_date=models.DateField()
     subscription_end_date=models.DateField()
+    password=models.CharField(max_length=50)
     def __str__(self):
         return self.name
 
