@@ -6,7 +6,7 @@ from .models import Profile,Courses,Batches, Admin,StudyMaterial
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Profile
-        fields = ('name', 'dob','email','phone','address','image','subscription_start_date','subscription_end_date')
+        fields = ('name', 'dob','email','phone','address','image','subscription_start_date','subscription_end_date', 'password')
 
 
 # class ImageSerializer(serializers.ModelSerializer):
