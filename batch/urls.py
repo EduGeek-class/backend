@@ -7,6 +7,7 @@ import re
 router = routers.DefaultRouter()
 router.register(r'profiles', views.UserViewSet)
 router.register(r'courses',views.CourseViewSet)
+router.register(r'material',views.MaterialViewSet)
 router.register(r'batches',views.BatchViewSet)
 router.register(r'site-admin',views.AdminViewSet)
 # Wire up our API using automatic URL routing.

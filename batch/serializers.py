@@ -1,7 +1,7 @@
 # serializers.py
 from rest_framework import serializers
 
-from .models import Profile,Courses,Batches, Admin
+from .models import Profile,Courses,Batches, Admin,StudyMaterial
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
@@ -18,6 +18,12 @@ class CourseSerializer(serializers.ModelSerializer):
     class Meta:
         model = Courses
         fields = ('title','class_number','video')
+
+class MaterialSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = StudyMaterial
+        fields = ('id','title','class_number','material')
+
 
 class BatchSerializer(serializers.ModelSerializer):
     class Meta:
