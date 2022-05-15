@@ -18,7 +18,7 @@ class CourseViewSet(viewsets.ModelViewSet):
     serializer_class = CourseSerializer
 
 class MaterialViewSet(viewsets.ModelViewSet):
-    queryset = Courses.objects.all().order_by('id')
+    queryset = StudyMaterial.objects.all().order_by('id')
     serializer_class = MaterialSerializer
 
 class BatchViewSet(viewsets.ModelViewSet):
