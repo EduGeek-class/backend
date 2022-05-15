@@ -1,8 +1,8 @@
 # views.py
 from rest_framework import viewsets
 
-from .serializers import UserSerializer, CourseSerializer, BatchSerializer, AdminSerializer ,MaterialSerializer
-from .models import Profile, Courses, Batches, Admin,StudyMaterial
+from .serializers import UserSerializer, CourseSerializer, BatchSerializer, AdminSerializer ,MaterialSerializer,NotifSerializer
+from .models import Profile, Courses, Batches, Admin,StudyMaterial,Notification
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -17,13 +17,20 @@ class CourseViewSet(viewsets.ModelViewSet):
     queryset = Courses.objects.all().order_by('title')
     serializer_class = CourseSerializer
 
+    
 class MaterialViewSet(viewsets.ModelViewSet):
     queryset = StudyMaterial.objects.all().order_by('id')
     serializer_class = MaterialSerializer
+    
+class NotifViewSet(viewsets.ModelViewSet):
+    queryset = Notification.objects.all().order_by('id')
+    serializer_class = NotifSerializer
+
 
 class BatchViewSet(viewsets.ModelViewSet):
     queryset = Batches.objects.all().order_by('batch_code')
     serializer_class = BatchSerializer
+
 class AdminViewSet(viewsets.ModelViewSet):
     queryset = Admin.objects.all().order_by('username')
     serializer_class = AdminSerializer

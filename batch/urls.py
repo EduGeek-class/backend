@@ -10,6 +10,7 @@ router.register(r'courses',views.CourseViewSet)
 router.register(r'material',views.MaterialViewSet)
 router.register(r'batches',views.BatchViewSet)
 router.register(r'site-admin',views.AdminViewSet)
+router.register(r'notif',views.NotifViewSet)
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
 urlpatterns = router.urls

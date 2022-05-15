@@ -1,7 +1,7 @@
 # serializers.py
 from rest_framework import serializers
 
-from .models import Profile,Courses,Batches, Admin,StudyMaterial
+from .models import Profile,Courses,Batches, Admin,StudyMaterial,Notification
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
@@ -24,6 +24,10 @@ class MaterialSerializer(serializers.ModelSerializer):
         model = StudyMaterial
         fields = ('id','title','class_number','material')
 
+class NotifSerializer(serializers.ModelSerializer):
+     class Meta:
+        model = Notification
+        fields = ('id','title','notif_type','desc')
 
 class BatchSerializer(serializers.ModelSerializer):
     class Meta:
