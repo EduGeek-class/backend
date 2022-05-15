@@ -52,6 +52,19 @@ class Batches(models.Model):
     def __str__(self):
         return str(self.batch_code)
 
+class Notification(models.Model):
+    TYPES = [
+            ('Announcement','Announcement'),
+            ('Live Classes','Live Classes'),
+            ('New Video','New Video'),
+
+    ]
+    title=models.CharField(max_length=50)
+    notif_type=models.CharField(max_length=50,choices=TYPES , default='New Video')
+    desc=models.CharField(max_length=500)
+    def __str__(self):
+        return self.title
+
 class Admin(models.Model):
     username=models.CharField(max_length=50, unique=True)
     password=models.CharField(max_length=50)
