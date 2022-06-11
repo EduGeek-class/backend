@@ -39,4 +39,6 @@ class AdminSerializer(serializers.ModelSerializer):
         model = Admin
         fields = ('username', 'password')
 
+        
+
  
