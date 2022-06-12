@@ -90,6 +90,10 @@ urlpatterns=[
 
     })),
    
+        
+     
+    
+   
     
 ]
     # path('upload/', views.UserViewSet.as_view(), name='upload')
