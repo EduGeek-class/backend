@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'batch.apps.BatchConfig',
     'rest_framework',
     'corsheaders',
+    
 ]
 
 MIDDLEWARE = [
@@ -80,6 +81,11 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'backend.wsgi.application'
 
+REST_FRAMEWORK = {
+    'DEFAULT_PARSER_CLASSES': [
+        'rest_framework.parsers.JSONParser',
+    ]
+}
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases

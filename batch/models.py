@@ -93,3 +93,9 @@ class StudyMaterial(models.Model):
 
     def __str__(self):
         return self.title
+
+# Tryoing 
+
+# class Image(models.Model):
+   
+#     image = models.ImageField(upload_to='image/')
