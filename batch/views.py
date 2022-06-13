@@ -29,7 +29,15 @@ class MaterialViewSet(viewsets.ModelViewSet):
     serializer_class = MaterialSerializer
     parser_classes = [MultiPartParser,FormParser]
     def create(self, request):
-        request.FILES.getlist('material')
+        material = request.FILES.getlist('material')
+
+        for m in material:
+            materialSerializer = MaterialSerializer(data = {'title' : request.data.get('title'), 'class_number' : request.data.get('class_number'), 'material' : m})
+
+            if materialSerializer.is_valid():
+                materialSerializer.save()
+            else:
+                return Response(arr, status=status.HTTP_400_BAD_REQUEST)
         
         return Response(status=status.HTTP_201_CREATED)
 
