@@ -71,6 +71,12 @@ class Admin(models.Model):
     def __str__(self):
         return str(self.username)
 
+class Material(models.Model):
+    material = models.FileField(upload_to='studymaterial/', null=True, verbose_name="")
+    
+    def _str_(self):
+       return self.material
+
 class StudyMaterial(models.Model):
     CLASS_NUMBER = [
         ('1','One'),
@@ -89,8 +95,9 @@ class StudyMaterial(models.Model):
     title=models.CharField(max_length=50)
     class_number=models.CharField(max_length=2,choices=CLASS_NUMBER , default='1')
     # class_number=models.CharField(max_length=2,choices=CLASS_NUMBER),
-    material= models.FileField(upload_to='studymaterial/', null=True, verbose_name="")
+    material = models.FileField(upload_to='studymaterial/', null=True, verbose_name="")
 
+    # material = models.ManyToManyField(Material)
     def __str__(self):
         return self.title
 
