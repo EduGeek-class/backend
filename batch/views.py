@@ -23,6 +23,20 @@ class CourseViewSet(viewsets.ModelViewSet):
     queryset = Courses.objects.all().order_by('title')
     serializer_class = CourseSerializer
 
+    parser_classes = [MultiPartParser,FormParser]
+    def create(self, request):
+        video = request.FILES.getlist('video')
+
+        for v in video:
+            videoSerializer = CourseSerializer(data = {'title' : request.data.get('title'), 'class_number' : request.data.get('class_number'), 'video' : v})
+
+            if videoSerializer.is_valid():
+                videoSerializer.save()
+            else:
+                return Response(arr, status=status.HTTP_400_BAD_REQUEST)
+        
+        return Response(status=status.HTTP_201_CREATED)
+
 
 class MaterialViewSet(viewsets.ModelViewSet):
     queryset = StudyMaterial.objects.all().order_by('id')
