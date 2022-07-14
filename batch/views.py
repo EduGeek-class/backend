@@ -20,6 +20,15 @@ class UserViewSet(viewsets.ModelViewSet):
 
 
 class CourseViewSet(viewsets.ModelViewSet):
+    def get_queryset(self):
+        batch_code = self.request.query_params.get('batch_code', None)
+        print(batch_code)
+
+        if(batch_code): 
+            return Courses.objects.filter(batch_code=batch_code)
+        else: 
+            return Courses.objects.all().order_by('title')
+
     queryset = Courses.objects.all().order_by('title')
     serializer_class = CourseSerializer
 
@@ -28,7 +37,7 @@ class CourseViewSet(viewsets.ModelViewSet):
         video = request.FILES.getlist('video')
 
         for v in video:
-            videoSerializer = CourseSerializer(data = {'title' : request.data.get('title'), 'class_number' : request.data.get('class_number'), 'video' : v})
+            videoSerializer = CourseSerializer(data = {'title' : request.data.get('title'), 'batch_code' : request.data.get('batch_code'), 'video' : v})
 
             if videoSerializer.is_valid():
                 videoSerializer.save()
@@ -39,14 +48,24 @@ class CourseViewSet(viewsets.ModelViewSet):
 
 
 class MaterialViewSet(viewsets.ModelViewSet):
+    def get_queryset(self):
+        batch_code = self.request.query_params.get('batch_code', None)
+        print(batch_code)
+
+        if(batch_code): 
+            return StudyMaterial.objects.filter(batch_code=batch_code)
+        else: 
+            return StudyMaterial.objects.all().order_by('title')
+
     queryset = StudyMaterial.objects.all().order_by('id')
     serializer_class = MaterialSerializer
+    
     parser_classes = [MultiPartParser,FormParser]
     def create(self, request):
         material = request.FILES.getlist('material')
 
         for m in material:
-            materialSerializer = MaterialSerializer(data = {'title' : request.data.get('title'), 'class_number' : request.data.get('class_number'), 'material' : m})
+            materialSerializer = MaterialSerializer(data = {'title' : request.data.get('title'), 'batch_code' : request.data.get('batch_code'), 'material' : m})
 
             if materialSerializer.is_valid():
                 materialSerializer.save()

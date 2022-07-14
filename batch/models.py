@@ -1,10 +1,48 @@
 from django.db import models
 from s3direct.fields import S3DirectField
+from rest_framework import serializers
 
 def nameFile(instance, filename):
     return '/'.join(['images', str(instance.name), filename])
 
 # Create your models here.
+class Material(models.Model):
+    material = models.FileField(upload_to='studymaterial/', null=True, verbose_name="")
+    
+    def _str_(self):
+       return self.material
+
+class StudyMaterial(models.Model):
+   
+    title=models.CharField(max_length=50)
+    material = models.FileField(upload_to='studymaterial/', null=True, verbose_name="")
+    batch_code=models.IntegerField(default=220101)
+    # material = models.ManyToManyField(Material)
+    def __str__(self):
+        return self.title
+
+class Courses(models.Model):
+  
+    title=models.CharField(max_length=50)
+    video= models.FileField(upload_to='videos/', null=True, verbose_name="")
+    batch_code=models.IntegerField(default=220101)
+    # thumbnail = models.ImageField(upload_to='thumbnail/', blank=True, null=True)
+    def __str__(self):
+        return self.title
+
+class Batches(models.Model):
+    batch_code=models.IntegerField(primary_key=True)
+    batch_start=models.DateTimeField()
+    course=models.CharField(max_length=50)
+    category=models.CharField(max_length=10, null=True, blank=True)
+    subject=models.CharField(max_length=20, null=True, blank=True)
+    
+
+    def __str__(self):
+        return str(self.batch_code)
+
+
+
 class Profile(models.Model):
     name=models.CharField(max_length=60)
     dob=models.DateField()
@@ -15,42 +53,11 @@ class Profile(models.Model):
     subscription_start_date=models.DateField()
     subscription_end_date=models.DateField()
     password=models.CharField(max_length=50)
+    batch_codes=models.ManyToManyField(Batches)
+    # course_codes = CourseCode()
+    # course_codes=models.CharField(max_length=10, default="[]")
     def __str__(self):
         return self.name
-
-
-class Courses(models.Model):
-    CLASS_NUMBER = [
-        ('1','One'),
-        ('2', 'Two'),
-        ('3', 'Three'),
-        ('4', 'Four'),
-        ('5', 'Five'),
-        ('6', 'Six'),
-        ('7', 'Seven'),
-        ('8', 'Eight'),
-        ('9', 'Nine'),
-        ('10', 'Ten'),
-        ('11', 'Eleven'),
-        ('12', 'Twelve'),
-    ]
-    title=models.CharField(max_length=50)
-    class_number=models.CharField(max_length=2,choices=CLASS_NUMBER , default='1')
-    # class_number=models.CharField(max_length=2,choices=CLASS_NUMBER),
-    video= models.FileField(upload_to='videos/', null=True, verbose_name="")
-
-    def __str__(self):
-        return self.title
-
-class Batches(models.Model):
-    batch_start=models.DateTimeField()
-    batch_code=models.IntegerField()
-    course=models.CharField(max_length=50)
-    category=models.CharField(max_length=10, null=True, blank=True)
-    subject=models.CharField(max_length=20, null=True, blank=True)
-    timing=models.TimeField(null=True, blank=True)
-    def __str__(self):
-        return str(self.batch_code)
 
 class Notification(models.Model):
     TYPES = [
@@ -71,38 +78,3 @@ class Admin(models.Model):
     def __str__(self):
         return str(self.username)
 
-class Material(models.Model):
-    material = models.FileField(upload_to='studymaterial/', null=True, verbose_name="")
-    
-    def _str_(self):
-       return self.material
-
-class StudyMaterial(models.Model):
-    CLASS_NUMBER = [
-        ('1','One'),
-        ('2', 'Two'),
-        ('3', 'Three'),
-        ('4', 'Four'),
-        ('5', 'Five'),
-        ('6', 'Six'),
-        ('7', 'Seven'),
-        ('8', 'Eight'),
-        ('9', 'Nine'),
-        ('10', 'Ten'),
-        ('11', 'Eleven'),
-        ('12', 'Twelve'),
-    ]
-    title=models.CharField(max_length=50)
-    class_number=models.CharField(max_length=2,choices=CLASS_NUMBER , default='1')
-    # class_number=models.CharField(max_length=2,choices=CLASS_NUMBER),
-    material = models.FileField(upload_to='studymaterial/', null=True, verbose_name="")
-
-    # material = models.ManyToManyField(Material)
-    def __str__(self):
-        return self.title
-
-# Tryoing 
-
-# class Image(models.Model):
-   
-#     image = models.ImageField(upload_to='image/')

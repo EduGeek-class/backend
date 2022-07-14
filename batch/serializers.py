@@ -4,16 +4,17 @@ from rest_framework import serializers
 from .models import Profile, Courses, Batches, Admin, StudyMaterial, Notification
 
 
-class UserSerializer(serializers.HyperlinkedModelSerializer):
+class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
+        # course_codes = serializers.ListField(child=serializers.CharField())
         fields = ('id', 'name', 'dob', 'email', 'phone', 'address', 'image',
-                  'subscription_start_date', 'subscription_end_date', 'password')
+                  'subscription_start_date', 'subscription_end_date', 'password','batch_codes')
 
 class CourseSerializer(serializers.ModelSerializer):
     class Meta:
         model = Courses
-        fields = ('id', 'title', 'class_number', 'video')
+        fields = ('id', 'title', 'video','batch_code')
 
 
 
@@ -21,7 +22,7 @@ class MaterialSerializer(serializers.ModelSerializer):
     material = serializers.FileField(max_length=None, allow_empty_file=False)
     class Meta:
         model = StudyMaterial
-        fields = ('id', 'title', 'class_number', 'material')
+        fields = ('id', 'title', 'material','batch_code')
         
 class NotifSerializer(serializers.ModelSerializer):
     class Meta:
@@ -32,8 +33,8 @@ class NotifSerializer(serializers.ModelSerializer):
 class BatchSerializer(serializers.ModelSerializer):
     class Meta:
         model = Batches
-        fields = ('id', 'batch_start', 'batch_code',
-                  'course', 'category', 'subject', 'timing')
+        fields = ('batch_start', 'batch_code',
+                  'course', 'category', 'subject' )
 
 
 class AdminSerializer(serializers.ModelSerializer):
