@@ -32,10 +32,12 @@ class Courses(models.Model):
 
 class Batches(models.Model):
     batch_code=models.IntegerField(primary_key=True)
-    batch_start=models.DateTimeField()
-    course=models.CharField(max_length=50)
-    category=models.CharField(max_length=10, null=True, blank=True)
-    subject=models.CharField(max_length=20, null=True, blank=True)
+    # batch_start=models.DateTimeField()
+    course_name=models.CharField(max_length=50)
+    description=models.CharField(max_length=100, null=True, blank=True)
+    price=models.IntegerField(default=10000)
+    course_validity=models.DateField(default='2022-07-26')
+    # subject=models.CharField(max_length=20, null=True, blank=True)
     
 
     def __str__(self):

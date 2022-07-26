@@ -33,8 +33,7 @@ class NotifSerializer(serializers.ModelSerializer):
 class BatchSerializer(serializers.ModelSerializer):
     class Meta:
         model = Batches
-        fields = ('batch_start', 'batch_code',
-                  'course', 'category', 'subject' )
+        fields = ('batch_code','course_name','description','price','course_validity' )
 
 
 class AdminSerializer(serializers.ModelSerializer):
