@@ -32,7 +32,7 @@ class NotifSerializer(serializers.ModelSerializer):
 class SubjectSerializer(serializers.ModelSerializer):
     class Meta:
         model = Subjects
-        fields = ['subject_code', 'subject_name']
+        fields = ['subject_code', 'subject_name','batch_code']
 
 class BatchSerializer(serializers.ModelSerializer):
     
