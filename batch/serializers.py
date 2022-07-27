@@ -1,7 +1,7 @@
 # serializers.py
 from rest_framework import serializers
 
-from .models import Profile, Courses, Batches, Admin, StudyMaterial, Notification
+from .models import Profile, Courses, Subjects,Batches, Admin, StudyMaterial, Notification
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -14,7 +14,7 @@ class UserSerializer(serializers.ModelSerializer):
 class CourseSerializer(serializers.ModelSerializer):
     class Meta:
         model = Courses
-        fields = ('id', 'title', 'video','batch_code')
+        fields = ('id', 'title', 'video','batch_code','subject_code')
 
 
 
@@ -22,18 +22,23 @@ class MaterialSerializer(serializers.ModelSerializer):
     material = serializers.FileField(max_length=None, allow_empty_file=False)
     class Meta:
         model = StudyMaterial
-        fields = ('id', 'title', 'material','batch_code')
+        fields = ('id', 'title', 'material','batch_code','subject_code')
         
 class NotifSerializer(serializers.ModelSerializer):
     class Meta:
         model = Notification
         fields = ('id', 'title', 'notif_type', 'desc')
 
+class SubjectSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Subjects
+        fields = ['subject_code', 'subject_name']
 
 class BatchSerializer(serializers.ModelSerializer):
+    
     class Meta:
         model = Batches
-        fields = ('batch_code','course_name','description','price','course_validity' )
+        fields = ('batch_code','course_name','description','price','course_validity' ,'image',)
 
 
 class AdminSerializer(serializers.ModelSerializer):

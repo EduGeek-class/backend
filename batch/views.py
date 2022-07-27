@@ -5,8 +5,8 @@ from rest_framework.response import Response
 from django.http import JsonResponse
 from rest_framework import status
 from rest_framework.parsers import MultiPartParser, FileUploadParser, FormParser
-from .serializers import UserSerializer, CourseSerializer, BatchSerializer, AdminSerializer, MaterialSerializer, NotifSerializer
-from .models import Profile, Courses, Batches, Admin, StudyMaterial, Notification
+from .serializers import UserSerializer, CourseSerializer,SubjectSerializer, BatchSerializer, AdminSerializer, MaterialSerializer, NotifSerializer
+from .models import Profile, Courses,Subjects, Batches, Admin, StudyMaterial, Notification
 from rest_framework.parsers import MultiPartParser,FormParser
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -37,7 +37,7 @@ class CourseViewSet(viewsets.ModelViewSet):
         video = request.FILES.getlist('video')
 
         for v in video:
-            videoSerializer = CourseSerializer(data = {'title' : request.data.get('title'), 'batch_code' : request.data.get('batch_code'), 'video' : v})
+            videoSerializer = CourseSerializer(data = {'title' : request.data.get('title'), 'batch_code' : request.data.get('batch_code'), 'video' : v,'subject_code':request.data.get('subject_code')})
 
             if videoSerializer.is_valid():
                 videoSerializer.save()
@@ -65,7 +65,7 @@ class MaterialViewSet(viewsets.ModelViewSet):
         material = request.FILES.getlist('material')
 
         for m in material:
-            materialSerializer = MaterialSerializer(data = {'title' : request.data.get('title'), 'batch_code' : request.data.get('batch_code'), 'material' : m})
+            materialSerializer = MaterialSerializer(data = {'title' : request.data.get('title'), 'batch_code' : request.data.get('batch_code'), 'material' : m,'subject_code':request.data.get('subject_code')})
 
             if materialSerializer.is_valid():
                 materialSerializer.save()
@@ -82,6 +82,9 @@ class NotifViewSet(viewsets.ModelViewSet):
     queryset = Notification.objects.all().order_by('id')
     serializer_class = NotifSerializer
 
+class SubjectViewSet(viewsets.ModelViewSet):
+    queryset = Subjects.objects.all().order_by('subject_code')
+    serializer_class = SubjectSerializer
 
 class BatchViewSet(viewsets.ModelViewSet):
     queryset = Batches.objects.all().order_by('batch_code')
@@ -105,6 +108,7 @@ class APIRoot(APIView):
             StudyMaterial.objects.all(), many=True).data
         notification = NotifSerializer(
             Notification.objects.all(), many=True).data
+        subject=SubjectSerializer(Subjects.objects.all(),many=True).data
         batch = BatchSerializer(Batches.objects.all(), many=True).data
         video = CourseSerializer(Courses.objects.all(), many=True).data
         # upload=ImageSerializer(Image.objects.all(),many=True).data
@@ -113,6 +117,7 @@ class APIRoot(APIView):
             "user": user,
             "study_material": study_material,
             "notif": notification,
+            "subject":subject,
             "batch": batch,
             "video": video,
 

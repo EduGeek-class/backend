@@ -16,7 +16,8 @@ class StudyMaterial(models.Model):
    
     title=models.CharField(max_length=50)
     material = models.FileField(upload_to='studymaterial/', null=True, verbose_name="")
-    batch_code=models.IntegerField(default=220101)
+    batch_code=models.IntegerField(default=2201)
+    subject_code=models.IntegerField(default=2201001)
     # material = models.ManyToManyField(Material)
     def __str__(self):
         return self.title
@@ -25,10 +26,17 @@ class Courses(models.Model):
   
     title=models.CharField(max_length=50)
     video= models.FileField(upload_to='videos/', null=True, verbose_name="")
-    batch_code=models.IntegerField(default=220101)
+    batch_code=models.IntegerField(default=2201)
+    subject_code=models.IntegerField(default=2201001)
     # thumbnail = models.ImageField(upload_to='thumbnail/', blank=True, null=True)
     def __str__(self):
         return self.title
+
+class Subjects(models.Model):
+    subject_code=models.IntegerField(primary_key=True)
+    subject_name=models.CharField(max_length=50)
+    def __str__(self):
+        return self.subject_code
 
 class Batches(models.Model):
     batch_code=models.IntegerField(primary_key=True)
@@ -37,11 +45,14 @@ class Batches(models.Model):
     description=models.CharField(max_length=100, null=True, blank=True)
     price=models.IntegerField(default=10000)
     course_validity=models.DateField(default='2022-07-26')
-    # subject=models.CharField(max_length=20, null=True, blank=True)
-    
+    image = models.ImageField(upload_to='batch/', blank=True, null=True)
+   
 
     def __str__(self):
         return str(self.batch_code)
+
+
+
 
 
 

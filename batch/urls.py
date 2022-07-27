@@ -69,7 +69,21 @@ urlpatterns=[
         'delete':'destroy'
         
 
-    })), path('batch/',views.BatchViewSet.as_view({
+    })), path('subject/',views.SubjectViewSet.as_view({
+        'get':'list',
+        'post':'create',
+        
+
+    })),
+    path('subject/<int:pk>',views.SubjectViewSet.as_view({
+        'get':'retrieve',
+        
+        'patch':'partial_update',
+        'delete':'destroy'
+        
+
+    }))
+    , path('batch/',views.BatchViewSet.as_view({
         'get':'list',
         'post':'create',
         
