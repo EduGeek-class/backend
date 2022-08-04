@@ -22,10 +22,11 @@ class UserViewSet(viewsets.ModelViewSet):
 class CourseViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         batch_code = self.request.query_params.get('batch_code', None)
+        subject_code = self.request.query_params.get('subject_code', None)
         print(batch_code)
 
-        if(batch_code): 
-            return Courses.objects.filter(batch_code=batch_code)
+        if(batch_code and subject_code): 
+            return Courses.objects.filter(batch_code=batch_code).filter(subject_code=subject_code)
         else: 
             return Courses.objects.all().order_by('title')
 
@@ -83,6 +84,14 @@ class NotifViewSet(viewsets.ModelViewSet):
     serializer_class = NotifSerializer
 
 class SubjectViewSet(viewsets.ModelViewSet):
+    def get_queryset(self):
+        batch_code = self.request.query_params.get('batch_code', None)
+
+        if(batch_code): 
+            return Subjects.objects.filter(batch_code=batch_code)
+        else: 
+            return Subjects.objects.all().order_by('subject_code')
+
     queryset = Subjects.objects.all().order_by('subject_code')
     serializer_class = SubjectSerializer
 
