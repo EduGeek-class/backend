@@ -66,7 +66,7 @@ class Profile(models.Model):
     subscription_start_date=models.DateField()
     subscription_end_date=models.DateField()
     password=models.CharField(max_length=50)
-    batch_codes=models.ManyToManyField(Batches)
+    batch_codes=models.ManyToManyField(Batches,null=True,blank=True)
     # course_codes = CourseCode()
     # course_codes=models.CharField(max_length=10, default="[]")
     def __str__(self):
