@@ -43,7 +43,7 @@ class CourseViewSet(viewsets.ModelViewSet):
             if videoSerializer.is_valid():
                 videoSerializer.save()
             else:
-                return Response(arr, status=status.HTTP_400_BAD_REQUEST)
+                return Response({'data': 'BAD REQUEST'}, status=status.HTTP_400_BAD_REQUEST)
         
         return Response(status=status.HTTP_201_CREATED)
 
