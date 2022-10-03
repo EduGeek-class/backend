@@ -113,3 +113,4 @@ urlpatterns=[
     # path('upload/', views.UserViewSet.as_view(), name='upload')
 
 
+# urls for get and post has been updated
