@@ -43,7 +43,10 @@ urlpatterns=[
         'delete':'destroy'
         
 
-    })), path('video/',views.CourseViewSet.as_view({
+    })), 
+        path('study_material/batch_code/<int:batch_code>', views.MaterialByBatchCodeAPIView.as_view(), name='material-by-batch'),
+
+    path('video/',views.CourseViewSet.as_view({
         'get':'list',
         'post':'create',
         

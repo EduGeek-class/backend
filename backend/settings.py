@@ -93,11 +93,11 @@ REST_FRAMEWORK = {
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': env('DB_NAME'),  
-        'USER': env('DB_USER'),  
-        'PASSWORD': env('DB_PASSWORD'),  
-        'HOST': env('DB_HOST'),  
-        'PORT': env('DB_PORT'), 
+        'NAME': "edugeek",  
+        'USER': "root",  
+        'PASSWORD': "1201",  
+        'HOST': "127.0.0.1",  
+        'PORT': '3306', 
     }
 }
 

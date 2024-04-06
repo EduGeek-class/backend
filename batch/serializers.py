@@ -1,5 +1,5 @@
 # serializers.py
-from rest_framework import serializers
+from rest_framework import serializers ,generics
 
 from .models import Profile, Courses, Subjects,Batches, Admin, StudyMaterial, Notification
 
@@ -23,7 +23,8 @@ class MaterialSerializer(serializers.ModelSerializer):
     class Meta:
         model = StudyMaterial
         fields = ('id', 'title', 'material','batch_code','subject_code')
-        
+
+  
 class NotifSerializer(serializers.ModelSerializer):
     class Meta:
         model = Notification

@@ -1,5 +1,5 @@
 # views.py
-from rest_framework import viewsets
+from rest_framework import viewsets,generics
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.http import JsonResponse
@@ -49,33 +49,37 @@ class CourseViewSet(viewsets.ModelViewSet):
 
 
 class MaterialViewSet(viewsets.ModelViewSet):
-    def get_queryset(self):
-        batch_code = self.request.query_params.get('batch_code', None)
-        print(batch_code)
-
-        if(batch_code): 
-            return StudyMaterial.objects.filter(batch_code=batch_code)
-        else: 
-            return StudyMaterial.objects.all().order_by('title')
-
     queryset = StudyMaterial.objects.all().order_by('id')
     serializer_class = MaterialSerializer
-    
-    parser_classes = [MultiPartParser,FormParser]
+    parser_classes = [MultiPartParser, FormParser]
+
+    def get_queryset(self):
+        batch_code = self.request.query_params.get('batch_code', None)
+        if batch_code:
+            return StudyMaterial.objects.filter(batch_code=batch_code)
+        else:
+            return StudyMaterial.objects.all().order_by('title')
+
     def create(self, request):
         material = request.FILES.getlist('material')
 
         for m in material:
-            materialSerializer = MaterialSerializer(data = {'title' : request.data.get('title'), 'batch_code' : request.data.get('batch_code'), 'material' : m,'subject_code':request.data.get('subject_code')})
+            material_serializer = MaterialSerializer(data={'title': request.data.get('title'), 'batch_code': request.data.get('batch_code'), 'material': m, 'subject_code': request.data.get('subject_code')})
 
-            if materialSerializer.is_valid():
-                materialSerializer.save()
+            if material_serializer.is_valid():
+                material_serializer.save()
             else:
-                return Response(arr, status=status.HTTP_400_BAD_REQUEST)
+                return Response(material_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         
         return Response(status=status.HTTP_201_CREATED)
 
+class MaterialByBatchCodeAPIView(generics.ListAPIView):
+    serializer_class = MaterialSerializer
 
+    def get_queryset(self):
+        batch_code = self.kwargs['batch_code']
+        return StudyMaterial.objects.filter(batch_code=batch_code)
+         
 
 
 

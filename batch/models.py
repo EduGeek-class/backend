@@ -19,7 +19,7 @@ class StudyMaterial(models.Model):
    
     title=models.CharField(max_length=50)
     material = models.FileField(upload_to='studymaterial/', null=True, verbose_name="")
-    batch_code=models.IntegerField(default=2201)
+    batch_code=models.IntegerField(max_length=4,default=2201)
     subject_code=models.IntegerField(default=220101)
     # material = models.ManyToManyField(Material)
     def __str__(self):
